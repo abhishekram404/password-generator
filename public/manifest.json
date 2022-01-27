@@ -1,6 +1,7 @@
 {
   "short_name": "Password Generator",
   "name": "Password Generator",
+  "description": "A password generator tool for generating secure passwords. This tool is created using React and Material UI.",
   "version": "1.0",
   "manifest_version": 2,
   "browser_action": {
