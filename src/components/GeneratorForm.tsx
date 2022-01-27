@@ -20,14 +20,13 @@ import { useEffect, useState } from "react";
 type Props = {};
 
 const GeneratorForm = (props: Props) => {
-  const [generatedPassword, setGeneratedPassword] = useState<string>(
-    generatePassword(8)
-  );
+  const [generatedPassword, setGeneratedPassword] = useState<string>("");
   const [isCopied, setCopied] = useState<boolean>(false);
   const [passwordLength, setPasswordLength] = useState<number>(12);
   const [includeSpecialChars, setIncludeSpecialChars] = useState<boolean>(true);
-
+  const [previousPassword, setPreviousPassword] = useState<string>("");
   const generate = (): void => {
+    setPreviousPassword(generatedPassword);
     setCopied(false);
     setGeneratedPassword(generatePassword(passwordLength, includeSpecialChars));
   };
@@ -39,7 +38,7 @@ const GeneratorForm = (props: Props) => {
     generate();
   }, [passwordLength, includeSpecialChars]);
 
-  const copyText = (event: any): void => {
+  const copyText = (): void => {
     navigator.clipboard.writeText(generatedPassword);
     setCopied(true);
     setTimeout(() => setCopied(false), 3000);
@@ -123,6 +122,23 @@ const GeneratorForm = (props: Props) => {
               }}
             />
           </Box>
+          {previousPassword && (
+            <Typography textAlign={"center"}>
+              Previous password :
+              <Typography
+                sx={{
+                  background: "#4d4d4d",
+                  color: "#eee",
+                  display: "inline",
+                  p: 1,
+                  ml: 2,
+                  borderRadius: "5px",
+                }}
+              >
+                {previousPassword}
+              </Typography>
+            </Typography>
+          )}
         </CardContent>
       </Card>
     </Container>
