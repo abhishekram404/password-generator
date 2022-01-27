@@ -3,14 +3,11 @@ import {
   CardContent,
   Container,
   Divider,
-  FilledInput,
-  FormControl,
   IconButton,
   InputAdornment,
   OutlinedInput,
   Slider,
   Switch,
-  TextField,
   Typography,
 } from "@mui/material";
 import { Sync } from "@mui/icons-material/";
@@ -18,8 +15,7 @@ import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import DoneIcon from "@mui/icons-material/Done";
 import { Box } from "@mui/system";
 import { generatePassword } from "../utils/GeneratePassword";
-import React, { useEffect, useState } from "react";
-import { Node } from "typescript";
+import { useEffect, useState } from "react";
 
 type Props = {};
 
