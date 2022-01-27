@@ -29,10 +29,11 @@ const GeneratorForm = (props: Props) => {
   );
   const [isCopied, setCopied] = useState<boolean>(false);
   const [passwordLength, setPasswordLength] = useState<number>(12);
+  const [includeSpecialChars, setIncludeSpecialChars] = useState<boolean>(true);
 
   const generate = (): void => {
     setCopied(false);
-    setGeneratedPassword(generatePassword(passwordLength));
+    setGeneratedPassword(generatePassword(passwordLength, includeSpecialChars));
   };
   const setLength = (value: number): void => {
     console.log(value);
@@ -40,7 +41,7 @@ const GeneratorForm = (props: Props) => {
   };
   useEffect(() => {
     generate();
-  }, [passwordLength]);
+  }, [passwordLength, includeSpecialChars]);
 
   const copyText = (event: any): void => {
     navigator.clipboard.writeText(generatedPassword);
@@ -48,7 +49,7 @@ const GeneratorForm = (props: Props) => {
   };
 
   return (
-    <Container sx={{ p: 6 }}>
+    <Container sx={{ p: 3 }}>
       <Card>
         <CardContent>
           <Typography variant="h5" color="text.primary" gutterBottom>
@@ -95,11 +96,9 @@ const GeneratorForm = (props: Props) => {
               // width: "100%",
             }}
           >
-            <Typography sx={{ mr: 4, textAlign: "left" }}>
-              Password length
-            </Typography>
+            <Typography>Password length</Typography>
             <Slider
-              sx={{ width: "250px" }}
+              sx={{ width: "250px", mx: 3 }}
               min={6}
               max={32}
               step={1}
@@ -110,7 +109,7 @@ const GeneratorForm = (props: Props) => {
                 setLength(value);
               }}
             />
-            <Typography sx={{ ml: 3 }}>{passwordLength}</Typography>
+            <Typography>{passwordLength}</Typography>
           </Box>
           <Box
             sx={{
@@ -123,7 +122,13 @@ const GeneratorForm = (props: Props) => {
             }}
           >
             <Typography sx={{ mr: 4 }}>Include special characters</Typography>
-            <Switch />
+            <Switch
+              checked={includeSpecialChars}
+              onChange={(event: any) => {
+                console.log(event.target.checked);
+                setIncludeSpecialChars(event.target.checked);
+              }}
+            />
           </Box>
         </CardContent>
       </Card>
