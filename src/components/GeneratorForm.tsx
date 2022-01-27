@@ -8,6 +8,7 @@ import {
   OutlinedInput,
   Slider,
   Switch,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import { Sync } from "@mui/icons-material/";
@@ -25,6 +26,8 @@ const GeneratorForm = (props: Props) => {
   const [passwordLength, setPasswordLength] = useState<number>(12);
   const [includeSpecialChars, setIncludeSpecialChars] = useState<boolean>(true);
   const [previousPassword, setPreviousPassword] = useState<string>("");
+  const [previousPasswordCopied, setPreviousPasswordCopied] =
+    useState<boolean>(false);
   const generate = (): void => {
     setPreviousPassword(generatedPassword);
     setCopied(false);
@@ -125,18 +128,32 @@ const GeneratorForm = (props: Props) => {
           {previousPassword && (
             <Typography textAlign={"center"}>
               Previous password :
-              <Typography
-                sx={{
-                  background: "#4d4d4d",
-                  color: "#eee",
-                  display: "inline",
-                  p: 1,
-                  ml: 2,
-                  borderRadius: "5px",
-                }}
+              <Tooltip
+                title={previousPasswordCopied ? "Copied" : "Click to copy"}
               >
-                {previousPassword}
-              </Typography>
+                <Typography
+                  variant="body2"
+                  component="span"
+                  onClick={() => {
+                    navigator.clipboard.writeText(previousPassword);
+                    setPreviousPasswordCopied(true);
+                  }}
+                  onMouseLeave={() =>
+                    setTimeout(() => setPreviousPasswordCopied(false), 500)
+                  }
+                  sx={{
+                    background: "#4d4d4d",
+                    color: "#eee",
+                    display: "inline",
+                    p: 1,
+                    ml: 2,
+                    borderRadius: "5px",
+                    cursor: "pointer",
+                  }}
+                >
+                  {previousPassword}
+                </Typography>
+              </Tooltip>
             </Typography>
           )}
         </CardContent>
