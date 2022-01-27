@@ -46,6 +46,7 @@ const GeneratorForm = (props: Props) => {
   const copyText = (event: any): void => {
     navigator.clipboard.writeText(generatedPassword);
     setCopied(true);
+    setTimeout(() => setCopied(false), 3000);
   };
 
   return (
@@ -92,8 +93,6 @@ const GeneratorForm = (props: Props) => {
               justifyContent: "center",
               alignItems: "center",
               flexWrap: "wrap",
-              // flexDirection: "row",
-              // width: "100%",
             }}
           >
             <Typography>Password length</Typography>
@@ -104,7 +103,6 @@ const GeneratorForm = (props: Props) => {
               step={1}
               marks
               defaultValue={12}
-              // valueLabelDisplay="on"
               onChangeCommitted={(event: any, value: any): void => {
                 setLength(value);
               }}
@@ -118,7 +116,6 @@ const GeneratorForm = (props: Props) => {
               justifyContent: "center",
               alignItems: "center",
               flexDirection: "row",
-              // width: "100%",
             }}
           >
             <Typography sx={{ mr: 4 }}>Include special characters</Typography>
