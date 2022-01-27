@@ -46,7 +46,7 @@ const GeneratorForm = (props: Props) => {
   };
 
   return (
-    <Container sx={{ p: 3 }}>
+    <Container sx={{ px: 2, py: 8 }} maxWidth="sm">
       <Card>
         <CardContent>
           <Typography variant="h5" color="text.primary" gutterBottom>
