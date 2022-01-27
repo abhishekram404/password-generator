@@ -1,13 +1,18 @@
+import React, { Suspense } from "react";
 import "./App.css";
-import Navbar from "./components/Navbar";
-import GeneratorForm from "./components/GeneratorForm";
-import { Box } from "@mui/material";
+
+import { Box, Typography } from "@mui/material";
+import Loading from "./components/Loading";
+const Navbar = React.lazy(() => import("./components/Navbar"));
+const GeneratorForm = React.lazy(() => import("./components/GeneratorForm"));
 
 function App() {
   return (
     <Box>
-      <Navbar />
-      <GeneratorForm />
+      <Suspense fallback={<Loading />}>
+        <Navbar />
+        <GeneratorForm />
+      </Suspense>
     </Box>
   );
 }
